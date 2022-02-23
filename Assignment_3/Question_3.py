@@ -16,10 +16,11 @@ class Employee:
 
 # main
 if __name__ == '__main__':
+    # Employee information
     empOne = Employee("Susan", "Meyers", 47899, "Accounting", "Vice President")
     empTwo = Employee("Mark", "Jones", 39119, "IT", "Programmer")
     empThree = Employee("Joy", "Rogers", 81774, "Manufacturing", "Engineer")
 
+    # prints full name and email
     print("Employee One Full Name: ", empOne.full)
     print("Employee One Email: ", empOne.email)
-    print()

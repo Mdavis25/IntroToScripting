@@ -1,7 +1,7 @@
+# Employee Class
 class Employee:
-    # init function takes first and last name, id number, department and job title
-    # as arguments and sets values in the object
     def __init__(self, fName, lName, idNum, dept, title):
+        # Declaring employee variables
         self.firstName = fName
         self.lastName = lName
         self.idNumber = idNum
@@ -9,11 +9,15 @@ class Employee:
         self.jobTitle = title
 
 
+# main
 if __name__ == '__main__':
+    # Employee Information
     empOne = Employee("Susan", "Meyers", 47899, "Accounting", "Vice President")
     empTwo = Employee("Mark", "Jones", 39119, "IT", "Programmer")
     empThree = Employee("Joy", "Rogers", 81774, "Manufacturing", "Engineer")
 
-    print(empOne, "\n")
-    print(empTwo, "\n")
-    print(empThree, "\n")
+    # printing employee info from class
+    print("Employee One: ", empOne.firstName, empOne.lastName, empOne.idNumber, empOne.department, empOne.jobTitle)
+    print("Employee Two: ", empTwo.firstName, empTwo.lastName, empTwo.idNumber, empTwo.department, empTwo.jobTitle)
+    print("Employee Three: ", empThree.firstName, empThree.lastName, empThree.idNumber, empThree.department,
+          empThree.jobTitle)

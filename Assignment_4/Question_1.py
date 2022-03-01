@@ -14,7 +14,7 @@ class Employee:
 
 
 # function partOne that looks up, adds, deletes, or changes the Employees
-def partOne():
+def empEnter():
     # flag to exit the program
     exitFlag = False
     empDict = {}
@@ -100,6 +100,7 @@ def partOne():
         else:
             print("Invalid Input, please input 1-5.")
 
+
 # main
 if __name__ == '__main__':
-    partOne()
+    empEnter()

@@ -1,55 +1,73 @@
-def partThree():
+# function to call in main
+def question3():
+    # print
     print("Counting numbers of letters, digits, and symbols in P@#yn26at^&i5ve")
 
-    strOne = 'P@#yn26at^&i5ve'
+    # sets string and counters
+    count = 'P@#yn26at^&i5ve'
     letterCount = 0
     digitCount = 0
     symbolCount = 0
 
-    for ch in strOne:
+    # for loop to count letters, digits and symbols
+    for ch in count:
+        # letters
         if ch.isalpha():
             letterCount += 1
+        # numbers
         elif ch.isdigit():
             digitCount += 1
+        # symbols
         else:
             symbolCount += 1
 
+    # prints counts
     print("Number of letters: ", letterCount)
     print("Number of digits: ", digitCount)
     print("Number of symbols: ", symbolCount, "\n")
 
-    strTwo = '/*Jon is @developer & musician'
-    modTwo = ""
+    # sets string and blank to modify with
+    remove = '/*Jon is @developer & musician'
+    modify = ""
 
-    for ch in strTwo:
-        if ch.isalpha() or ch.isdigit() or ch.isspace():
-            modTwo = modTwo + ch
+    # for loop to remove symbols
+    for ch in remove:
+        if ch.isalpha() or ch.isspace():
+            modify = modify + ch
 
-    print("String before modification: ", strTwo)
-    print("String after modification: ", modTwo, "\n")
+    # prints string before and after modification
+    print("String before modification: ", remove)
+    print("String after modification: ", modify, "\n")
 
-    strThree = 'Emma-is-a-data-scientist'
-    modThree = ""
+    # sets string and empty one to modify
+    remove = 'Emma-is-a-data-scientist'
+    modify = ""
 
-    for ch in strThree:
+    # for loop to remove symbols and replaced them with spaces
+    for ch in remove:
         if ch == '-':
-            modThree = modThree + ' '
+            modify = modify + ' '
         else:
-            modThree = modThree + ch
+            modify = modify + ch
 
-    print("String before modification: ", strThree)
-    print("String after modification: ", modThree, "\n")
+    # prints string before and after modification
+    print("String before modification: ", remove)
+    print("String after modification: ", modify, "\n")
 
-    strFour = 'Hello, have a good day'
-    modFour = ""
+    # sets string and empty one to modify
+    remove = 'Hello, have a good day'
+    modify = ""
 
-    for ch in strFour:
+    # for loop to remove consonants from string
+    for ch in remove:
         if ch.upper() == 'A' or ch.upper() == 'E' or ch.upper() == 'I' or ch.upper() == 'O' or ch.upper() == 'U' or ch.isspace():
-            modFour = modFour + ch
+            modify = modify + ch
 
-    print("String before modification: ", strFour)
-    print("String after modification: ", modFour)
+    # prints string before and after modification
+    print("String before modification: ", remove)
+    print("String after modification: ", modify)
 
 
+# main
 if __name__ == '__main__':
-    partThree()
+    question3()

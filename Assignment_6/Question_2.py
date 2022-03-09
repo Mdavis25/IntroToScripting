@@ -1,36 +1,45 @@
+# function to read file
 def readFile(inFile):
-    tempTxt = inFile.read()
-    return tempTxt
+    text = inFile.read()
+    return text
 
 
-def writeFile(one, two, three):
+# function to write to file
+def writeFile(f1, f2, f3):
+    # opens file to append
     inFile = open('final_file.txt', 'a')
-    inFile.write(one)
+    # reads and writes all passed strings into new file
+    inFile.write(f1)
     inFile.write('\n')
-    inFile.write(two)
+    inFile.write(f2)
     inFile.write('\n')
-    inFile.write(three)
+    inFile.write(f3)
+    # closes file
     inFile.close()
 
 
-def partTwo():
+# function to call in main
+def question2():
+    # uses try block for exception
     try:
-        inOne = open('f1.txt', 'r')
-        inTwo = open('f2.txt', 'r')
-        inThree = open('f3.txt', 'r')
-
-        firstTxt = readFile(inOne)
-        secondTxt = readFile(inTwo)
-        thirdTxt = readFile(inThree)
-
-        inOne.close()
-        inTwo.close()
-        inThree.close()
-
-        writeFile(firstTxt, secondTxt, thirdTxt)
+        # opens and reads each file
+        f1 = open('f1.txt', 'r')
+        f2 = open('f2.txt', 'r')
+        f3 = open('f3.txt', 'r')
+        write1 = readFile(f1)
+        write2 = readFile(f2)
+        write3 = readFile(f3)
+        # closes files
+        f1.close()
+        f2.close()
+        f3.close()
+        # writes in new file
+        writeFile(write1, write2, write3)
+    # except error
     except FileNotFoundError:
         print("Error opening file")
 
 
+# main
 if __name__ == '__main__':
-    partTwo()
+    question2()

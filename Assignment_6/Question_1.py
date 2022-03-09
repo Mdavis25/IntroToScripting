@@ -2,7 +2,8 @@ import re
 import random
 
 
-class Student():
+# student class
+class Student:
     def __init__(self, fName, lName, eMail, cList):
         self.firstName = fName
         self.lastName = lName
@@ -13,77 +14,96 @@ class Student():
         return '{self.firstName} {self.lastName} {self.email} {self.allCourse}'.format(self=self)
 
 
+# function to call in main
 def question1():
+    # opens file and reads it
     infile = open('students.txt', 'r')
-    studentDetails = infile.read()
+    student = infile.read()
+    # close file
     infile.close()
 
-    stuFnames = re.findall('\n[A-Z]+[a-z]+\s', studentDetails)
-    for num in range(0, len(stuFnames)):
-        temp = stuFnames[num].rstrip()
+    # finds students first names
+    stuFirstNames = re.findall('\n[A-Z]+[a-z]+\s', student)
+    # for loop and regular expression to remove spaces and \n
+    for num in range(0, len(stuFirstNames)):
+        temp = stuFirstNames[num].rstrip()
         temp = temp.lstrip('\n')
-        stuFnames[num] = temp
+        stuFirstNames[num] = temp
 
-    stuLnames = re.findall('\ +[A-Z]+[a-z]+\s', studentDetails)
-    stuLnames.pop(0)
-    for num in range(0, len(stuLnames)):
-        temp = stuLnames[num].rstrip()
+    # finds students last names
+    stuLastNames = re.findall('\ +[A-Z]+[a-z]+\s', student)
+    stuLastNames.pop(0)
+    # uses for loop and regular express to find last name and set it to temp
+    for num in range(0, len(stuLastNames)):
+        temp = stuLastNames[num].rstrip()
         temp = temp.lstrip()
-        stuLnames[num] = temp
+        stuLastNames[num] = temp
 
-    stuEmails = re.findall('[a-z]+@islander.tamucc.edu', studentDetails)
+    # finds students emails
+    Email = re.findall('[a-z]+@islander.tamucc.edu', student)
 
-    uneditedCourse = re.findall('\d+,\d+,\d+,\d+,\d+,\d+\n', studentDetails)
-    uneditedCourse.append(re.findall('\d+,\d+,\d+,\d+,\d+,\d+$', studentDetails)[0])
+    # finds the course numbers and stores it in variable
+    courseNum = re.findall('\d+,\d+,\d+,\d+,\d+,\d+\n', student)
+    # appends stored variable
+    courseNum.append(re.findall('\d+,\d+,\d+,\d+,\d+,\d+$', student)[0])
 
-    listOfLists = []
+    # empty list to store
+    listOne = []
 
-    for numList in uneditedCourse:
+    # for loop to extract student grades
+    for numList in courseNum:
         tempList = [0, 0, 0, 0, 0, 0]
         temp = ""
-        current = 0
+        count = 0
         for ind in range(0, len(numList)):
             if not numList[ind].isdigit():
-                tempList[current] = int(temp)
-                current += 1
+                tempList[count] = int(temp)
+                count += 1
                 temp = ""
             else:
                 temp = temp + numList[ind]
                 if ind == len(numList) - 1:
-                    tempList[current] = int(temp)
-        listOfLists.append(tempList)
+                    tempList[count] = int(temp)
+        listOne.append(tempList)
 
+    # empty list
     listOfStudents = []
     print("List of students gathered from original text file: ")
-    for num in range(0, len(stuFnames)):
-        tempStudent = Student(stuFnames[num], stuLnames[num], stuEmails[num], listOfLists[num])
+    # uses for loop to append students to the list
+    for num in range(0, len(stuFirstNames)):
+        tempStudent = Student(stuFirstNames[num], stuLastNames[num], Email[num], listOne[num])
         listOfStudents.append(tempStudent)
         print(listOfStudents[num])
     print("\n\n")
 
+    # opens file
     outfile = open('students.txt', 'a')
 
-    tempFirst = "Student"
+    # names of students, last name will be blank
+    tempFirst = "Child"
     tempLast = ""
 
+    #
     print("Students being appended to file:")
-
+    # for loop to write students on new file
     for i in range(0, 25):
-
+        # write out to file
         outfile.write('\n')
-
+        # last name will be student number
         tempLast = str(i)
-
         tempScores = [0, 0, 0, 0, 0, 0]
-        for i in range(0, 6):
+        # gives students random scores
+        for n in range(0, 6):
             tempScores[i] = random.randint(0, 100)
-
+        # writes students email
         tempEmail = tempFirst[0].lower() + str(tempLast) + "@islander.tamucc.edu"
-
+        # creates student
         tempStudent = Student(tempFirst, tempLast, tempEmail, tempScores)
+        # prints student
         print(tempStudent)
+        # appends students to list
         listOfStudents.append(tempStudent)
-
+        # writes students information to file
         outfile.write(tempFirst)
         outfile.write(" ")
         outfile.write(tempLast)
@@ -95,31 +115,35 @@ def question1():
             if num != len(tempScores) - 1:
                 outfile.write(",")
     print("\n\n")
+    # close file
     outfile.close()
 
-    listOfStudents.sort(key=lambda x: x.firstName)
+    # sorts students in list
+    listOfStudents.sort()
     print("Sorted list of students being added to final file:")
     for student in listOfStudents:
         print(student)
 
-    sortout = open('sorted_students.txt', 'w')
-
+    # opens file to write
+    stuSort = open('sorted_students.txt', 'w')
+    # writes out student information into a new file
     for ind in range(0, len(listOfStudents)):
-        sortout.write(listOfStudents[ind].firstName)
-        sortout.write(" ")
-        sortout.write(listOfStudents[ind].lastName)
-        sortout.write(" ")
-        sortout.write(listOfStudents[ind].email)
-        sortout.write(" ")
+        stuSort.write(listOfStudents[ind].firstName)
+        stuSort.write(" ")
+        stuSort.write(listOfStudents[ind].lastName)
+        stuSort.write(" ")
+        stuSort.write(listOfStudents[ind].email)
+        stuSort.write(" ")
         for num in range(0, len(listOfStudents[ind].allCourse)):
-            sortout.write(str(listOfStudents[ind].allCourse[num]))
+            stuSort.write(str(listOfStudents[ind].allCourse[num]))
             if num != len(listOfStudents[ind].allCourse) - 1:
-                sortout.write(",")
+                stuSort.write(",")
         if ind != len(listOfStudents) - 1:
-            sortout.write('\n')
+            stuSort.write('\n')
+    # closes file
+    stuSort.close()
 
-    sortout.close()
 
-
+# main
 if __name__ == '__main__':
     question1()

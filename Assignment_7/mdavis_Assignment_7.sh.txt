@@ -1,0 +1,68 @@
+#!/bin/bash
+
+#Variables
+name="Matthew Davis"
+courseOne="Intro to Scripting"
+courseTwo="Discrete Mathmatics"
+courseThree="Skills for a Computing Professional"
+
+
+#Print
+echo "$name $courseOne , $courseTwo , $courseThree , $courseFour "
+
+
+#Printing with special char
+echo "$*"
+
+
+#Printing current process number of shell
+echo "Current process number of shell: $$"
+
+
+#Prints all arguments passed
+echo "$*"
+
+
+#Problem 5 - Find random number (grade), find letter grade using if, else if, else 
+
+#Get random number
+randomnum=$$
+random1=$(($randomnum%100))
+echo Random number is $random1
+
+#finds if grade is an A
+if [[ $random1 -le 100 && $random1 -ge 90 ]]
+then
+	echo "Grade is A"
+#finds if grade is an B
+elif [[ $random1 -le 89 && $random1 -ge 80 ]]
+then
+	echo "Grade is B"
+#finds if grade is an C
+elif [[ $random1 -le 79 && $random1 -ge 70 ]]
+then
+	echo "Grade is C"
+#finds if grade is an D
+elif [[ $random1 -le 69 && $random1 -ge 60 ]]
+then
+	echo "Grade is D"
+else
+#failure
+	echo "Failing Grade"
+fi
+
+#addition, subtraction, multiplication and division for numbers
+
+varOne=6
+varTwo=10
+varThree=12
+varFour=15
+
+echo "$varOne, $varTwo, $varThree, $varFour"
+
+echo "Variable two - variable one = $((varTwo-varOne))"
+echo "Variable two + variable three = $((varTwo+varThree))"
+echo "Variable three * variable four = $((varThree*varFour))"
+echo "Variable four / variable one = $((varFour/varOne))"
+echo "Incrementing varOne: $((++varOne))"
+echo "Decrementing varThree: $((--varThree))"

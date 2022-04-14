@@ -1,0 +1,139 @@
+#!/bin/bash
+
+#prints 1-15 using while, until and for loop
+
+#while loop
+num=1
+while [ $num -le 15 ]
+do
+	echo $num
+	let num++
+done
+
+#until loop
+num=1
+until [ $num -gt 15 ]
+do
+	echo $num
+	let num++
+done
+
+#for loop
+for (( num=1; num<=15; num++ ))
+do
+	echo $num
+done
+
+
+#summation of numbers 20-40 using while, until and for loop
+
+#while loop
+sum=0
+num=20
+while [ $num -le 40 ]
+do
+	let sum+=num num++
+done
+
+echo while loop sum: $sum
+
+#until loop
+sum=0
+num=20
+until [ $num -gt 40 ]
+do
+	let sum+=num num++
+done
+
+echo Until loop sum: $sum
+
+#for loop
+sum=0
+for (( num=20; num<=40; num++ ))
+do
+	let sum+=num
+done
+echo For loop sum: $sum
+
+
+#prints all prime numbers less than 50 using while, until and for loop
+
+#while loop
+num=2
+while [ $num -le 50 ]
+do
+	flag=0
+	count=2
+	while [ $count -lt $num ]
+	do
+		check=$((num%count))
+		if [ $check -eq 0 ]
+		then
+			flag=1
+			break
+		fi
+		let count++
+	done
+	if [ $flag -eq 0 ]
+	then
+		echo $num
+	fi
+	let num++
+done
+
+#until loop
+num=2
+until [ $num -gt 50 ]
+do
+	flag=0
+	count=2
+	until [ $count -ge $num ]
+	do
+		check=$((num%count))
+		if [ $check -eq 0 ]
+		then
+			flag=1
+			break
+		fi
+		let count++
+	done
+	if [ $flag -eq 0 ]
+	then
+		echo $num
+	fi
+	let num++
+done
+
+#for loop
+for (( num=2; num<=50; num++))
+do
+	flag=0
+	for(( count=2; count<num; count++))
+	do
+		check=$((num%count))
+		if [ $check -eq 0 ]
+		then
+			flag=1
+			break
+		fi
+	done
+	if [ $flag -eq 0 ]
+	then
+		echo $num
+	fi
+done
+
+#asks user to enter Corpus, Kingville, or Commerce, prints different options based on input
+select city in Corpus Kingsville Commerce
+do
+	case $city in
+		Corpus)
+			echo "Texas A&M University Corpus Christi";;
+		Kingsville)
+			echo "Texas A&M University Kingsville";;
+		Commerce)
+			echo "Texas A&M University Commerce";;
+		*)
+			echo "Texas A&M University";;
+	esac
+done

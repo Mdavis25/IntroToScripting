@@ -1,0 +1,115 @@
+#!/bin/bash
+clear
+
+#Using a loop and random numbers, I created a list of twenty numbers and sorted them from lowest to highest
+
+for (( num1=0; num1<20; num1++ ))
+do
+	rand=$RANDOM
+	arr1[num1]=$(($rand%100))
+done
+echo "Unsorted list: ${arr1[*]}"
+
+
+for (( num1 = 0; num1<${#arr1[@]}; num1++ ))
+do
+    for(( num2 = 0; num2<${#arr1[@]}-$num1-1; num2++ ))
+    do
+    
+        if [ ${arr1[$num2]} -gt ${arr1[$((num2+1))]} ]
+        then
+            temp=${arr1[$num2]}
+            arr1[$num2]=${arr1[$((num2+1))]}  
+            arr1[$((num2+1))]=$temp
+        fi
+    done
+done
+
+echo "Sorted list from lowest to highest: ${arr1[@]}"
+
+#Using a loop and random numbers, I created a list of twenty numbers and sorted them from highest to lowest 
+
+for (( num1=0; num1<20; num1++ ))
+do
+	rand=$RANDOM
+	arr2[num1]=$(($rand%100))
+done
+echo "Unsorted list: ${arr2[*]}"
+
+
+for (( num1 = 0; num1<${#arr2[@]}; num1++ ))
+do
+    for(( num2 = 0; num2<${#arr2[@]}-$num1-1; num2++ ))
+    do
+    
+        if [ ${arr2[$num2]} -lt ${arr2[$((num2+1))]} ]
+        then
+            temp=${arr2[$num2]}
+            arr2[$num2]=${arr2[$((num2+1))]}  
+            arr2[$((num2+1))]=$temp
+        fi
+    done
+done
+
+echo "Sorted list from highest to lowest: ${arr2[@]}"
+
+#creates an array for numbers 1-50
+
+for (( num1=1; num1<=50; num1++ ))
+do
+	arr3[$num1-1]=$num1
+done
+
+echo "Array of 1-50: ${arr3[@]}"
+
+#uses a function to find all prime numbers 1-50 and find their sum
+
+getPrime()
+{	
+	sum=0
+	echo "Prime numbers 1-50: "
+	for (( num1=2; num1<=50; num1++))
+	do
+		flag=0
+		for(( num2=2; num2<num1; num2++))
+		do
+			rem=$((num1%j))
+			if [ $rem -eq 0 ]
+			then
+				flag=1
+				break
+			fi
+		done
+		if [ $flag -eq 0 ]
+		then
+			echo $num1
+			let sum+=$num1
+		fi
+	done
+	echo "Sum of all prime numbers 1-50: $sum"
+}
+
+getPrime
+
+#creates an array of odd numbers 1-50 and finds their sum, creates an array of even numbers 1-50 and finds their sum
+
+intEven=0
+sumEven=0
+intOdd=0
+sumOdd=0
+for(( num1 = 1; num1<=50; num1++ ))
+do
+	if [ $((num1%2)) -eq 0 ]
+	then
+		evenArr[intEven]=$num1
+		let intEven++ sumEven+=num1
+	else
+		oddArr[intOdd]=$num1
+		let intOdd++ sumOdd+=num1
+	fi
+done
+
+echo "Even numbers in 1-50: ${evenArr[@]}"
+echo "Sum of even numbers 1-50: $sumEven"
+echo "Odd numbers in 1-50: ${oddArr[@]}"
+echo "Sum of odd numbers 1-50: $sumOdd"

@@ -1,0 +1,108 @@
+#!/bin/bash
+clear
+
+# uses recursive method to find the summation of numbers from the text file
+
+file="nums.txt"
+count=0
+while read line
+do
+	a[count]=$line
+	let count++
+done < $file
+
+echo ${a[@]}
+
+sum=0
+
+getSum()
+{
+	i=$1
+	
+	if [ ${#a[@]} -lt 1 ]
+	then
+		return 0
+	else
+		let sum+=${a[i]}
+		unset a[$i]
+		let i--
+		getSum $i	
+	fi
+}
+
+let startingI=(${#a[@]}-1)
+getSum startingI
+
+echo "Sum: $sum"
+
+
+# takes an input from the user, uses recursive method to find the fibonacci series
+
+
+getFib()
+{
+	num=$1
+	if [ $num -le 1 ]
+	then
+		echo $num
+	else
+		echo "$(( $(getFib $(($fib-2)))+$(getFib $(($num-1))) ))"
+	fi
+}
+
+read -p "Enter number for fib sequence: " uIn
+
+for (( i=0; i<=$uIn; i++ ))
+do
+	fArr[i]=$(getFib $i)
+done
+
+echo "Fib sequence: ${fArr[@]}"
+
+
+
+# appends the output from question 1 and question 2 to a file
+
+outFile=output.txt
+
+echo $sum >> $outFile
+
+for (( i=0; i<${#fArr[@]}; i++ ))
+do
+	echo ${fArr[i]} >> $outFile
+done
+
+
+
+# creates a random array and sorts it using recursive function. Prints the sorted array in a file. 
+
+for (( i=0; i<10; i++))
+do
+	rand=$RANDOM
+	sArr[i]=$(($rand%100))
+done
+echo "Unsorted Array: ${sArr[@]}"
+
+recSort()
+{
+	n=$1
+	if [ $n == ${#sArr[@]} ]
+	then
+		return 0
+	else
+		for (( i=$n; i<${#sArr[@]}; i++ ))
+		do
+			if [ ${sArr[n]} -gt ${sArr[i]} ]
+			then
+				temp=${sArr[n]}
+				sArr[n]=${sArr[i]}
+				sArr[i]=$temp
+			fi
+		done
+		let n++
+		recSort $n
+	fi
+}
+
+recSort 0
+echo "Sorted Array: ${sArr[@]}"
